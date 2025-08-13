@@ -1,0 +1,44 @@
+.certificate-information {
+    text-align: right;
+    padding-top: 30px;
+    font-size: 12px;
+    position: absolute;
+    bottom: 20px;
+    right: 25px;
+}
+
+.achievement-count{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-top: 25px;
+    font-size: 14px;
+}
+
+.achievement-count .total-achieved-value{
+    margin-left: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 35px;
+}
+
+.total-achieved-rophy-board{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.total-achieved-rophy{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+}
+
+.rophy-count{
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 8px;
+}
