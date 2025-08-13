@@ -86,9 +86,9 @@
                 <div class="right">
                     <div class="top"></div>
                     <div class="bottom"></div>
-                    <div class="logo" @click="toggleLogo">
-                        <img v-if="showLogo" src="./assets/sdutacm_logo_colorful.svg" alt="Logo1" />
-                        <img v-else src="./assets/zzcz_logo.png" alt="Logo2" />
+                    <div class="logo">
+                        <img v-if="Logo==='zzcz'" src="./assets/zzcz_logo.png" alt="Logo_zzcz" />
+                        <img v-else src="./assets/sdutacm_logo_colorful.svg" alt="Default Logo" />
                     </div>
                 </div>
             </div>
@@ -107,16 +107,17 @@
     const achievements = ref([]);
     const nickname = ref("");
     const totalAchievements = ref("");
-    const showLogo = ref(false);
+    const Logo = ref('default'); 
     const levelToColor = {
-        3: "#FFD700", // 金
-        2: "#C0C0C0", // 银
-        1: "#CD7F32", // 铜
+        3: "#f8bf29",
+        2: "silver",
+        1: "#d69872",
     };
 
 
-    function toggleLogo() {
-        showLogo.value = !showLogo.value;
+    function updateLogo() {
+        const params = new URLSearchParams(window.location.search)
+        Logo.value = params.get('logo') || 'default'
     }
 
     // 获取会话状态并获取昵称
@@ -137,8 +138,8 @@
     async function ojLogin() {
         try {
             const res = await req.post("/login", {
-                loginName: "sdutwujinhao@gmail.com",
-                password: "138671995qq"
+                loginName: "",
+                password: ""
             });
             console.log("模拟登录成功:", res);
             return true;
@@ -198,6 +199,7 @@
     });
 
     onMounted(async () => {
+        updateLogo();
         const loggedIn = await checkSession();
         if (!loggedIn) {
             await ojLogin();
