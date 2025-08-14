@@ -1,21 +1,43 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vite App</title>
-    <style>
-      body{
-        margin: 0;
-        background-color: #f4f4f4;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
 
-  
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SDUT OJ 成就证书</title>
+
+  <style>
+    :root {
+      --bg-color: #f4f4f4;
+      --menu-color: #ffffffb3;
+      --font-color: #000000bf;
+      --box-shadow-color: rgba(0,0,0,0.1);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #191919;
+        --menu-color: #242424;
+        --font-color: #DFDFDF;
+        --box-shadow-color: rgb(255, 255, 255,0.1);
+      }
+    }
+
+    body {
+      margin: 0 ;
+      background-color: var(--bg-color);
+    }
+
+
+
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+
 </html>

@@ -1,0 +1,62 @@
+.menu {
+    background-color: var(--menu-color);
+    color: var(--font-color);
+    fill: var(--font-color);
+    box-shadow: 0 0 5px var(--box-shadow-color);
+    width: 100vw;
+}
+
+
+.menu-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.home-button {
+    height: 50px;
+    line-height: 60px;
+    padding: 0 20px 0 0;
+    font-weight: 500;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+
+a svg {
+    text-decoration: none;
+    fill: inherit;
+    cursor: pointer;
+    transition: fill .3s;
+    padding: 0 30px;
+    height: 50px;
+}
+
+a:hover svg {
+    fill: #40a9ff;
+}
+
+.title {
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.menu-button {
+    display: flex;
+    flex-direction: row;
+}
+
+.menu-button div svg {
+    padding-right: 30px;
+    fill: inherit;
+    transition: fill .3s;
+    cursor: pointer;
+}
+
+.menu-button div:hover svg {
+    fill: #40a9ff;
+}
