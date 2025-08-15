@@ -1,5 +1,5 @@
 <template>
-
+    <div class="container">
         <div v-for="(page, pageIndex) in pagedAchievements" :key="pageIndex" class="certificate-container">
             <div class="certificate-border">
                 <div class="content">
@@ -87,13 +87,15 @@
                     <div class="top"></div>
                     <div class="bottom"></div>
                     <div class="logo">
-                        <img v-if="Logo==='zzcz'" src="@/assets/zzcz_logo.png" alt="Logo_zzcz" crossorigin="anonymous"/>
-                        <img v-else src="@/assets/sdutacm_logo_colorful.svg" alt="Default Logo" crossorigin="anonymous"/>
+                        <img v-if="Logo === 'zzcz'" src="@/assets/zzcz_logo.png" alt="Logo_zzcz"
+                            crossorigin="anonymous" />
+                        <img v-else src="@/assets/sdutacm_logo_colorful.png" alt="Default Logo"
+                            crossorigin="anonymous" />
                     </div>
                 </div>
             </div>
         </div>
-
+    </div>
 </template>
 
 <script setup>
@@ -107,7 +109,7 @@
     const achievements = ref([]);
     const nickname = ref("");
     const totalAchievements = ref("");
-    const Logo = ref('default'); 
+    const Logo = ref('default');
     const levelToColor = {
         3: "#f8bf29",
         2: "silver",

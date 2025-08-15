@@ -39,11 +39,23 @@
         const target = certificateRef.value?.$el || certificateRef.value;
         if (!target) return;
 
-        return await html2canvas(target, {
+        // 先用 html2canvas 渲染
+        const rawCanvas = await html2canvas(target, {
             scale: 2,
             useCORS: true,
             backgroundColor: "#ffffff"
         });
+
+        // 创建一个新的 Canvas，把图片缩放到 A4 300 DPI 尺寸
+        const A4_WIDTH = 3508;
+        const A4_HEIGHT = 2480;
+        const finalCanvas = document.createElement("canvas");
+        finalCanvas.width = A4_WIDTH;
+        finalCanvas.height = A4_HEIGHT;
+
+        const ctx = finalCanvas.getContext("2d");
+        ctx.drawImage(rawCanvas, 0, 0, A4_WIDTH, A4_HEIGHT);
+        return finalCanvas;
     }
 
     async function downloadAsPNG() {
