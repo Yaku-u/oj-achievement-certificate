@@ -41,20 +41,23 @@
 
         // 先用 html2canvas 渲染
         const rawCanvas = await html2canvas(target, {
-            scale: 2,
+            scale: 3,
             useCORS: true,
             backgroundColor: "#ffffff"
         });
 
-        // 创建一个新的 Canvas，把图片缩放到 A4 300 DPI 尺寸
         const A4_WIDTH = 3508;
         const A4_HEIGHT = 2480;
-        const finalCanvas = document.createElement("canvas");
-        finalCanvas.width = A4_WIDTH;
-        finalCanvas.height = A4_HEIGHT;
 
+        const scale = Math.min(A4_WIDTH / rawCanvas.width, A4_HEIGHT / rawCanvas.height);
+        const finalWidth = rawCanvas.width * scale;
+        const finalHeight = rawCanvas.height * scale;
+
+        const finalCanvas = document.createElement("canvas");
+        finalCanvas.width = finalWidth;
+        finalCanvas.height = finalHeight;
         const ctx = finalCanvas.getContext("2d");
-        ctx.drawImage(rawCanvas, 0, 0, A4_WIDTH, A4_HEIGHT);
+        ctx.drawImage(rawCanvas, 0, 0, finalWidth, finalHeight);
         return finalCanvas;
     }
 
@@ -97,7 +100,7 @@
         pdf.save("certificate.pdf");
     }
 
-    function print(){
+    function print() {
         window.print();
     }
 </script>

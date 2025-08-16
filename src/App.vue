@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="AppContainer">
         <Menu :certificateRef="certificateRef" />
         <certificate ref="certificateRef" />
         <footer>© 2008-2025 SDUTACM. All Rights Reserved.</footer>
