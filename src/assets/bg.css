@@ -3,8 +3,8 @@
     height: 340px;
     background: #4372aa;
     position: absolute;
-    top: -220px;
-    right: -220px;
+    top: -210px;
+    right: -210px;
     transform: rotate(45deg);
     z-index: 3;
     box-shadow: 0 0px 40px #4372aa;
@@ -15,8 +15,8 @@
     height: 460px;
     background: #7f9fc0;
     position: absolute;
-    top: -280px;
-    right: -280px;
+    top: -270px;
+    right: -270px;
     transform: rotate(45deg);
     z-index: 0;
     box-shadow: 0 0px 70px #7f9fc0;

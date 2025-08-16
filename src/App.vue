@@ -2,6 +2,7 @@
     <div class="container">
         <Menu :certificateRef="certificateRef" />
         <certificate ref="certificateRef" />
+        <footer>© 2008-2025 SDUTACM. All Rights Reserved.</footer>
     </div>
 
 </template>
@@ -16,12 +17,5 @@
 
 
 <style scoped>
-    .container {
-        -webkit-user-select: none;
-        user-select: none;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+@import url(./assets/main.css);
 </style>

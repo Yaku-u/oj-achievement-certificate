@@ -211,7 +211,7 @@
 </script>
 
 <style scoped>
-    @import url(../assets/main.css);
+    @import url(../assets/cerficate.css);
     @import url(../assets/bg.css);
     @import url(../assets/footer.css);
 </style>

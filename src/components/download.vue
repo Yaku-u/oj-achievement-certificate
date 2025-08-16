@@ -72,7 +72,7 @@
         if (!canvas) return;
         const imgData = canvas.toDataURL("image/png");
 
-        const pdf = new jsPDF("p", "mm", "a4");
+        const pdf = new jsPDF("l", "mm", "a4");
         const pageWidth = pdf.internal.pageSize.getWidth();
         const pageHeight = pdf.internal.pageSize.getHeight();
         const imgWidth = pageWidth;
@@ -96,6 +96,10 @@
 
         pdf.save("certificate.pdf");
     }
+
+    function print(){
+        window.print();
+    }
 </script>
 
 <style scoped>
@@ -104,10 +108,10 @@
         position: absolute;
         top: 60px;
         right: 20px;
-        background-color: white;
-        border: 1px solid #ccc;
+        background-color: var(--menu-color);
+        border: 1px solid var(--box-shadow-color);
         min-width: 100px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 2px 8px var(--box-shadow-color);
         border-radius: 4px;
         z-index: 100;
     }
