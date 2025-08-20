@@ -99,7 +99,7 @@
 </template>
 
 <script setup>
-    import { ref, onMounted, computed } from "vue";
+    import { ref, onMounted, computed,watch } from "vue";
     import req from "@/utils/req.js";
     import achievementsConfig from "@/configs/achievement-config";
 
@@ -208,10 +208,20 @@
         }
         await getSelfAchievedAchievements();
     });
+
+    const emit = defineEmits(["updateData"])
+
+    watch([totalAchievements, nickname, goldCount, silverCount, copperCount], () => {
+        emit("updateData", {
+            totalAchievements: totalAchievements.value,
+            nickname: nickname.value,
+            goldCount: goldCount.value,
+            silverCount: silverCount.value,
+            copperCount: copperCount.value
+        })
+    }, { immediate: true }) 
 </script>
 
 <style scoped>
     @import url(../assets/cerficate.css);
-    @import url(../assets/bg.css);
-    @import url(../assets/footer.css);
 </style>

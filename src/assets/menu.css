@@ -3,8 +3,7 @@
     color: var(--font-color);
     fill: var(--font-color);
     box-shadow: 0 0 5px var(--box-shadow-color);
-    width: 100vw;
-
+    width: 100%;
 }
 
 
@@ -60,4 +59,14 @@ a:hover svg {
 
 .menu-button div:hover svg {
     fill: #40a9ff;
+}
+
+
+@media screen and (max-width: 768px){
+    .title{
+        display: none;
+    }
+    .download{
+        display: none;
+    }
 }
