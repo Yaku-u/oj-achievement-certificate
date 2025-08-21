@@ -17,19 +17,19 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
   ],
-  server: {
-    proxy: {
-      '/onlinejudge3/api': {
-        target: 'https://oj.sdutacm.cn',
-        changeOrigin: true,
-        secure: false,
-        cookieDomainRewrite: '',
-      },
-    },
-  },
+  base: '/oj-achievement-certificate/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  experimental: {
+    renderBuiltUrl(filename) {
+      let cdnUrl = process.env.CDN_URL || '/oj-achievement-certificate';
+      if (!cdnUrl.endsWith('/')) {
+        cdnUrl += '/';
+      }
+      return `${cdnUrl}${filename}`;
+    },
+  }
 })
