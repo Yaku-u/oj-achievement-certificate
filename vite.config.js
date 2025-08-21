@@ -25,7 +25,7 @@ export default defineConfig({
   },
   experimental: {
     renderBuiltUrl(filename) {
-      let cdnUrl = process.env.CDN_URL || '/oj-achievement-certificate';
+      let cdnUrl = process.env.CDN_URL || '/oj-certificate';
       if (!cdnUrl.endsWith('/')) {
         cdnUrl += '/';
       }

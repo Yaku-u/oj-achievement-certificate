@@ -21,7 +21,7 @@ jobs:
       - name: Upload to COS
         uses: zkqiang/tencent-cos-action@v0.1.0
         with:
-          args: upload -r ./dist/ oj-achievement-certificate
+          args: upload -r ./dist/ oj-certificate
           secret_id: ${{ secrets.COS_SECRET_ID }}
           secret_key: ${{ secrets.COS_SECRET_KEY }}
           bucket: ${{ secrets.COS_BUCKET }}
