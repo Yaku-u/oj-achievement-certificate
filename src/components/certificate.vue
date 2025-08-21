@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <!-- <fallback v-if="!isLogin"/> -->
         <div v-for="(page, pageIndex) in pagedAchievements" :key="pageIndex" class="certificate-container">
             <div class="certificate-border">
                 <div class="content">
@@ -102,14 +103,15 @@
     import { ref, onMounted, computed, watch } from "vue";
     import req from "@/utils/req.js";
     import achievementsConfig from "@/configs/achievement-config";
+    import fallback from "./fallback.vue";
 
     const IssueDate = new Date().toISOString().slice(0, 10);
     const CertificateID = Date.now().toString();
-
     const achievements = ref([]);
     const nickname = ref("");
-    const totalAchievements = ref("");
+    const totalAchievements = ref(0);
     const Logo = ref('default');
+    const isLogin = ref(true);
     const levelToColor = {
         3: "#f8bf29",
         2: "silver",
@@ -140,8 +142,8 @@
     async function ojLogin() {
         try {
             const res = await req.post("/login", {
-                loginName: "",
-                password: ""
+                loginName: "1816140905@qq.com",
+                password: "wzhzjq2xx"
             });
             console.log("模拟登录成功:", res);
             return true;
@@ -209,6 +211,7 @@
         updateLogo();
         const loggedIn = await checkSession();
         if (!loggedIn) {
+            isLogin.value = false;
             await ojLogin();
         }
         await getSelfAchievedAchievements();
@@ -216,13 +219,14 @@
 
     const emit = defineEmits(["updateData"])
 
-    watch([totalAchievements, nickname, goldCount, silverCount, copperCount], () => {
+    watch([totalAchievements, nickname, goldCount, silverCount, copperCount,isLogin], () => {
         emit("updateData", {
             totalAchievements: totalAchievements.value,
             nickname: nickname.value,
             goldCount: goldCount.value,
             silverCount: silverCount.value,
-            copperCount: copperCount.value
+            copperCount: copperCount.value,
+            isLogin: isLogin.value
         })
     }, { immediate: true }) 
 </script>

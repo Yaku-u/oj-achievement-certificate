@@ -11,6 +11,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 
 .home-button {
@@ -20,6 +21,8 @@
     font-weight: 500;
     font-size: 15px;
     text-decoration: none;
+    outline: none !important;
+    border: none;
 }
 
 
@@ -61,12 +64,17 @@ a:hover svg {
     fill: #40a9ff;
 }
 
+.download .el-dropdown-link {
+    outline: none !important;
+    border: none;
+}
 
-@media screen and (max-width: 768px){
-    .title{
+@media screen and (max-width: 768px) {
+    .title {
         display: none;
     }
-    .download{
+
+    .download {
         display: none;
     }
 }

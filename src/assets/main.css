@@ -6,8 +6,12 @@
     justify-content: space-between;
     align-items: center;
     min-height: 100vh;
-    width: 99vw;
+    width: 100vw;
     background-color: var(--bg-color);
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 footer {
@@ -20,41 +24,6 @@ footer {
     text-align: center;
 }
 
-@media print {
-    body * {
-        visibility: hidden;
-    }
-
-    .menu {
-        display: none;
-    }
-
-    .container,
-    .container * {
-        visibility: visible;
-    }
-
-    .container {
-        position: absolute;
-        top: 0;
-        left: 1px;
-        gap: 0;
-        margin: 0;
-    }
-
-    .left .bottom{
-        position: static;
-    }
-
-    .left .top{
-        position: static;
-    }
-}
-
-@page {
-    margin: 0;
-    size: landscape;
-}
 
 @media screen and (max-width: 768px) {
     footer {

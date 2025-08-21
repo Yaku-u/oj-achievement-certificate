@@ -1,12 +1,13 @@
 <template>
     <div class="AppContainer">
-        <Menu :certificateRef="certificateRef" />
-        <certificate ref="certificateRef" class="certificate" @updateData="handleUpdate" v-show="!isMobile" />
+        <Menu :certificateRef="certificateRef"/>
+        <fallback v-if="!certificateData.isLogin"/>
+        <certificate ref="certificateRef" class="certificate" @updateData="handleUpdate" v-show="!isMobile" v-if="certificateData.isLogin"/>
         <!-- 移动端 -->
         <media class="media" v-show="isMobile" :nickname="certificateData.nickname"
             :totalAchievements="certificateData.totalAchievements" :goldCount="certificateData.goldCount"
             :silverCount="certificateData.silverCount" :copperCount="certificateData.copperCount"
-            :certificateRef="certificateRef" />
+            :certificateRef="certificateRef"  v-if="certificateData.isLogin"/>
         <footer>© 2008-2025 SDUTACM. All Rights Reserved.</footer>
     </div>
     
@@ -23,6 +24,7 @@
     import certificate from '@/components/certificate.vue'
     import Menu from '@/components/menu.vue'
     import media from '@/components/media.vue';
+    import fallback from "./components/fallback.vue";
 
     const certificateRef = ref(null);
     const hiddenCertificateRef = ref(null);
@@ -40,7 +42,8 @@
         nickname: "",
         goldCount: 0,
         silverCount: 0,
-        copperCount: 0
+        copperCount: 0,
+        isLogin: true
     })
 
     function handleUpdate(payload) {
