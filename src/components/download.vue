@@ -39,63 +39,64 @@
         const target = certificateRef.value?.$el || certificateRef.value;
         if (!target) return;
 
-        // 先用 html2canvas 渲染
-        const rawCanvas = await html2canvas(target, {
-            scale: 3,
-            useCORS: true,
-            backgroundColor: "#ffffff"
-        });
+        // 获取所有证书页面
+        const pages = target.querySelectorAll('.certificate-container');
+        const canvases = [];
 
-        const A4_WIDTH = 3508;
-        const A4_HEIGHT = 2480;
+        // 为每个页面创建canvas
+        for (const page of pages) {
+            const rawCanvas = await html2canvas(page, {
+                scale: 3,
+                useCORS: true,
+                backgroundColor: "#ffffff"
+            });
 
-        const scale = Math.min(A4_WIDTH / rawCanvas.width, A4_HEIGHT / rawCanvas.height);
-        const finalWidth = rawCanvas.width * scale;
-        const finalHeight = rawCanvas.height * scale;
+            const A4_WIDTH = 3508;
+            const A4_HEIGHT = 2480;
 
-        const finalCanvas = document.createElement("canvas");
-        finalCanvas.width = finalWidth;
-        finalCanvas.height = finalHeight;
-        const ctx = finalCanvas.getContext("2d");
-        ctx.drawImage(rawCanvas, 0, 0, finalWidth, finalHeight);
-        return finalCanvas;
+            const scale = Math.min(A4_WIDTH / rawCanvas.width, A4_HEIGHT / rawCanvas.height);
+            const finalWidth = rawCanvas.width * scale;
+            const finalHeight = rawCanvas.height * scale;
+
+            const finalCanvas = document.createElement("canvas");
+            finalCanvas.width = finalWidth;
+            finalCanvas.height = finalHeight;
+            const ctx = finalCanvas.getContext("2d");
+            ctx.drawImage(rawCanvas, 0, 0, finalWidth, finalHeight);
+
+            canvases.push(finalCanvas);
+        }
+
+        return canvases;
     }
 
     async function downloadAsPNG() {
-        const canvas = await captureCertificate();
-        if (!canvas) return;
-        const link = document.createElement("a");
-        link.href = canvas.toDataURL("image/png");
-        link.download = "certificate.png";
-        link.click();
+        const canvases = await captureCertificate();
+        if (!canvases) return;
+
+        canvases.forEach((canvas, index) => {
+            const link = document.createElement("a");
+            link.href = canvas.toDataURL("image/png");
+            link.download = `certificate-${index + 1}.png`;
+            link.click();
+        });
     }
 
     async function downloadAsPDF() {
-        const canvas = await captureCertificate();
-        if (!canvas) return;
-        const imgData = canvas.toDataURL("image/png");
+        const canvases = await captureCertificate();
+        if (!canvases) return;
 
         const pdf = new jsPDF("l", "mm", "a4");
         const pageWidth = pdf.internal.pageSize.getWidth();
         const pageHeight = pdf.internal.pageSize.getHeight();
-        const imgWidth = pageWidth;
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-        if (imgHeight <= pageHeight) {
-            pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-        } else {
-            let heightLeft = imgHeight;
-            let position = 0;
-            pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-
-            while (heightLeft > 0) {
-                position = heightLeft - imgHeight;
+        canvases.forEach((canvas, index) => {
+            if (index > 0) {
                 pdf.addPage();
-                pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
             }
-        }
+            const imgData = canvas.toDataURL("image/png");
+            pdf.addImage(imgData, "PNG", 0, 0, pageWidth, pageHeight);
+        });
 
         pdf.save("certificate.pdf");
     }

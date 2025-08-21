@@ -2,13 +2,20 @@
     <div class="AppContainer">
         <Menu :certificateRef="certificateRef" />
         <certificate ref="certificateRef" class="certificate" @updateData="handleUpdate" v-show="!isMobile" />
+        <!-- 移动端 -->
         <media class="media" v-show="isMobile" :nickname="certificateData.nickname"
             :totalAchievements="certificateData.totalAchievements" :goldCount="certificateData.goldCount"
             :silverCount="certificateData.silverCount" :copperCount="certificateData.copperCount"
             :certificateRef="certificateRef" />
         <footer>© 2008-2025 SDUTACM. All Rights Reserved.</footer>
     </div>
-
+    
+    <!-- 将组件传送到隐藏容器 -->
+    <Teleport to="body">
+        <div id="hidden-certificate-container" style="position: absolute; left: -9999px; top: -9999px; pointer-events: none;">
+            <certificate ref="hiddenCertificateRef" class="certificate" @updateData="handleUpdate" />
+        </div>
+    </Teleport>
 </template>
 
 <script setup>
@@ -18,6 +25,7 @@
     import media from '@/components/media.vue';
 
     const certificateRef = ref(null);
+    const hiddenCertificateRef = ref(null);
     const isMobile = ref(false);
     
     onMounted(() => {
@@ -38,7 +46,6 @@
     function handleUpdate(payload) {
         Object.assign(certificateData, payload)
     }
-
 
 </script>
 

@@ -99,7 +99,7 @@
 </template>
 
 <script setup>
-    import { ref, onMounted, computed,watch } from "vue";
+    import { ref, onMounted, computed, watch } from "vue";
     import req from "@/utils/req.js";
     import achievementsConfig from "@/configs/achievement-config";
 
@@ -155,6 +155,11 @@
     async function getSelfAchievedAchievements() {
         try {
             const data = await req.post("/getSelfAchievedAchievements");
+            // const data = {
+            //     count: 40, 
+            //     rows: Array(40).fill({ achievementKey: "SolveProblemsLv1" })
+            // }
+
             achievements.value = [];
             totalAchievements.value = data.count;
             data.rows.forEach((item) => {
