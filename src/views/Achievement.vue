@@ -1,7 +1,7 @@
 <template>
     <div class="AppContainer">
         <Menu :certificateRef="certificateRef"/>
-        <fallback v-if="!certificateData.isLogin"/>
+        <fallback v-if="certificateData.isLogin === false"/>
         <certificate ref="certificateRef" class="certificate" @updateData="handleUpdate" v-show="!isMobile" />
         <!-- 移动端 -->
 

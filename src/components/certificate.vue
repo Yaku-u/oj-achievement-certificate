@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div v-if="isLogin" v-for="(page, pageIndex) in pagedAchievements" :key="pageIndex" class="certificate-container">
+        <div v-if="isLogin === true" v-for="(page, pageIndex) in pagedAchievements" :key="pageIndex" class="certificate-container">
             <div class="certificate-border">
                 <div class="content">
                     <div class="title">
@@ -109,7 +109,7 @@
     const nickname = ref("");
     const totalAchievements = ref(0);
     const Logo = ref('default');
-    const isLogin = ref(false);
+    const isLogin = ref(undefined);
     const levelToColor = {
         3: "#f8bf29",
         2: "silver",
@@ -141,8 +141,8 @@
     async function ojLogin() {
         try {
             const res = await req.post("/login", {
-                loginName: "",
-                password: ""
+                loginName: undefined,
+                password: undefined
             });
             console.log("模拟登录成功:", res);
             return true;
