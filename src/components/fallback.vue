@@ -2,7 +2,7 @@
     <div class="fallback " >
         <div class="text">Please Login First</div>
         <div class="loginBtn">
-            <el-button class="btn" tag="a" href="https://oj.sdutacm.cn/">Go Home</el-button>
+            <el-button class="btn" tag="a" href="https://oj.sdutacm.cn">To Login</el-button>
             <el-button class="btn" @click="reload">↻ Reload </el-button>
         </div>
 

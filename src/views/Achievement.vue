@@ -1,10 +1,11 @@
 <template>
     <div class="AppContainer">
         <Menu :certificateRef="certificateRef"/>
-        <fallback />
+        <fallback v-if="!certificateData.isLogin"/>
         <certificate ref="certificateRef" class="certificate" @updateData="handleUpdate" v-show="!isMobile" />
         <!-- 移动端 -->
-        <media class="media" v-show="isMobile" :nickname="certificateData.nickname"
+
+        <media class="media" v-if="certificateData.isLogin" v-show="isMobile" :nickname="certificateData.nickname"
             :totalAchievements="certificateData.totalAchievements" :goldCount="certificateData.goldCount"
             :silverCount="certificateData.silverCount" :copperCount="certificateData.copperCount"
             :certificateRef="certificateRef"/>
@@ -24,7 +25,7 @@
     import certificate from '@/components/certificate.vue'
     import Menu from '@/components/menu.vue'
     import media from '@/components/media.vue';
-
+    import fallback from "@/components/fallback.vue";
     const certificateRef = ref(null);
     const hiddenCertificateRef = ref(null);
     const isMobile = ref(false);
@@ -42,6 +43,7 @@
         goldCount: 0,
         silverCount: 0,
         copperCount: 0,
+        isLogin: false
     })
 
     function handleUpdate(payload) {

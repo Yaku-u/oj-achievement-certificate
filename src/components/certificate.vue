@@ -1,7 +1,6 @@
 <template>
     <div class="container">
-        <!-- <fallback v-if="!isLogin"/> -->
-        <div v-for="(page, pageIndex) in pagedAchievements" :key="pageIndex" class="certificate-container">
+        <div v-if="isLogin" v-for="(page, pageIndex) in pagedAchievements" :key="pageIndex" class="certificate-container">
             <div class="certificate-border">
                 <div class="content">
                     <div class="title">
@@ -103,7 +102,6 @@
     import { ref, onMounted, computed, watch } from "vue";
     import req from "@/utils/req.js";
     import achievementsConfig from "@/configs/achievement-config";
-    import fallback from "./fallback.vue";
 
     const IssueDate = new Date().toISOString().slice(0, 10);
     const CertificateID = Date.now().toString();
@@ -111,7 +109,7 @@
     const nickname = ref("");
     const totalAchievements = ref(0);
     const Logo = ref('default');
-    const isLogin = ref(true);
+    const isLogin = ref(false);
     const levelToColor = {
         3: "#f8bf29",
         2: "silver",
@@ -130,6 +128,7 @@
             const data = await req.get("/getSession");
             if (data) {
                 nickname.value = data.nickname;
+                console.log("nickname", nickname.value);
                 return true;
             }
         } catch (err) {
@@ -212,7 +211,8 @@
         const loggedIn = await checkSession();
         if (!loggedIn) {
             isLogin.value = false;
-            await ojLogin();
+        } else {
+            isLogin.value = true;
         }
         await getSelfAchievedAchievements();
     });

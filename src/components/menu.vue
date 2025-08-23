@@ -2,12 +2,12 @@
     <div class="menu">
         <div class="menu-header">
             <div class="home-button">
-                <a href="https://oj.sdutacm.cn/">
+                <router-link to="/">
                     <svg xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960" width="26px">
                         <path
                             d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z" />
                     </svg>
-                </a>
+                </router-link>
             </div>
             <div class="title" v-if="route.name !== 'Home'">
                 SDUT OJ Achievement Certificate
@@ -61,7 +61,7 @@
     }
 
     function goGithub(){
-        window.location.href = "https://github.com/Yaku-u/oj-achievement-certificate";
+        window.location.href = "https://github.com/sdutacm/oj-achievement-certificate";
     }
 
     onMounted(() => {
