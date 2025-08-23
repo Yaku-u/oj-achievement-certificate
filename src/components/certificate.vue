@@ -232,5 +232,5 @@
 </script>
 
 <style scoped>
-    @import url(../assets/cerficate.css);
+    @import url(../assets/certificate.css);
 </style>
