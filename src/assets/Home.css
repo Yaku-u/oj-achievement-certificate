@@ -9,6 +9,8 @@
     max-width: 100vw;
     background-color: var(--bg-color);
     color: var(--font-color);
+    padding-top: 55px;
+    box-sizing: border-box;
 }
 
 .container {

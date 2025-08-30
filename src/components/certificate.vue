@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-        <div v-if="isLogin === true" v-for="(page, pageIndex) in pagedAchievements" :key="pageIndex" class="certificate-container">
+    <div class="container" v-if="isLogin">
+        <div v-for="(page, pageIndex) in pagedAchievements" :key="pageIndex" class="certificate-container">
             <div class="certificate-border">
                 <div class="content">
                     <div class="title">
@@ -141,8 +141,8 @@
     async function ojLogin() {
         try {
             const res = await req.post("/login", {
-                loginName: undefined,
-                password: undefined
+                loginName: '1816140905@qq.com',
+                password: 'wzhzjq2xx'
             });
             console.log("模拟登录成功:", res);
             return true;
@@ -211,6 +211,7 @@
         const loggedIn = await checkSession();
         if (!loggedIn) {
             isLogin.value = false;
+            ojLogin();
         } else {
             isLogin.value = true;
         }

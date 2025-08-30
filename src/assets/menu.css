@@ -3,7 +3,13 @@
     color: var(--font-color);
     fill: var(--font-color);
     box-shadow: 0 0 5px var(--box-shadow-color);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
     width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
 }
 
 

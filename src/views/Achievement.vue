@@ -1,11 +1,11 @@
 <template>
     <div class="AppContainer">
         <Menu :certificateRef="certificateRef"/>
-        <fallback v-if="certificateData.isLogin === false"/>
-        <certificate ref="certificateRef" class="certificate" @updateData="handleUpdate" v-show="!isMobile" />
+        <fallback v-if="certificateData.isLogin === false" class="flexCenter"/>
+        <certificate ref="certificateRef" class="certificate flexCenter" @updateData="handleUpdate" v-show="!isMobile" />
         <!-- 移动端 -->
 
-        <media class="media" v-if="certificateData.isLogin" v-show="isMobile" :nickname="certificateData.nickname"
+        <media class="media flexCenter" v-if="certificateData.isLogin" v-show="isMobile" :nickname="certificateData.nickname"
             :totalAchievements="certificateData.totalAchievements" :goldCount="certificateData.goldCount"
             :silverCount="certificateData.silverCount" :copperCount="certificateData.copperCount"
             :certificateRef="certificateRef"/>
