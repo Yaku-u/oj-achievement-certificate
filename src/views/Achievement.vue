@@ -1,11 +1,11 @@
 <template>
-    <div class="AppContainer">
-        <Menu :certificateRef="certificateRef"/>
+    <div class="AppContainer" v-loading="isLoading" element-loading-background="var(--bg-color)">
+        <Menu :certificateRef="certificateRef" v-show="!isLoading"/>
         <fallback v-if="certificateData.isLogin === false" class="flexCenter"/>
-        <certificate ref="certificateRef" class="certificate flexCenter" @updateData="handleUpdate" v-show="!isMobile" />
+        <certificate ref="certificateRef" class="certificate flexCenter" @updateData="handleUpdate" v-show="!isMobile && certificateData.isLogin" @load="onCertificateLoad"/>
         <!-- 移动端 -->
 
-        <media class="media flexCenter" v-if="certificateData.isLogin" v-show="isMobile" :nickname="certificateData.nickname"
+        <media class="media flexCenter"  v-show="isMobile && certificateData.isLogin" :nickname="certificateData.nickname"
             :totalAchievements="certificateData.totalAchievements" :goldCount="certificateData.goldCount"
             :silverCount="certificateData.silverCount" :copperCount="certificateData.copperCount"
             :certificateRef="certificateRef"/>
@@ -29,7 +29,12 @@
     const certificateRef = ref(null);
     const hiddenCertificateRef = ref(null);
     const isMobile = ref(false);
-    
+    const isLoading = ref(true);
+
+    function onCertificateLoad() {
+        isLoading.value = false; 
+    }
+
     onMounted(() => {
         isMobile.value = window.innerWidth <= 768
         window.addEventListener("resize", () => {

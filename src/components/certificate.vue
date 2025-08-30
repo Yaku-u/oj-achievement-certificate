@@ -1,5 +1,5 @@
 <template>
-    <div class="container" v-if="isLogin">
+    <div class="container" v-if="Loading" element-loading-background="var(--bg-color)">
         <div v-for="(page, pageIndex) in pagedAchievements" :key="pageIndex" class="certificate-container">
             <div class="certificate-border">
                 <div class="content">
@@ -110,6 +110,7 @@
     const totalAchievements = ref(0);
     const Logo = ref('default');
     const isLogin = ref(undefined);
+    const Loading = ref(false);
     const levelToColor = {
         3: "#f8bf29",
         2: "silver",
@@ -216,11 +217,13 @@
             isLogin.value = true;
         }
         await getSelfAchievedAchievements();
+        Loading.value = true;
+        emit('load');
     });
 
-    const emit = defineEmits(["updateData"])
+    const emit = defineEmits()
 
-    watch([totalAchievements, nickname, goldCount, silverCount, copperCount,isLogin], () => {
+    watch([totalAchievements, nickname, goldCount, silverCount, copperCount, isLogin], () => {
         emit("updateData", {
             totalAchievements: totalAchievements.value,
             nickname: nickname.value,

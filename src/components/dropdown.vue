@@ -96,10 +96,13 @@
     
 </script>
 
-<style scoped>
-
+<style>
 .downItem svg {
     fill: currentColor;
     padding-right: 5px;
+}
+
+.downItem{
+    transition: all .3s ease;
 }
 </style>
