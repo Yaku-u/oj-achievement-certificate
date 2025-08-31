@@ -9,7 +9,7 @@
             :totalAchievements="certificateData.totalAchievements" :goldCount="certificateData.goldCount"
             :silverCount="certificateData.silverCount" :copperCount="certificateData.copperCount"
             :certificateRef="certificateRef"/>
-        <footer>© 2008-2025 SDUTACM. All Rights Reserved.</footer>
+        <footer v-show="!isLoading">© 2008-2025 SDUTACM. All Rights Reserved.</footer>
     </div>
     
     <!-- 将组件传送到隐藏容器 -->
