@@ -1,5 +1,5 @@
 <template>
-    <div class="container" v-if="Loading" element-loading-background="var(--bg-color)">
+    <div class="container" v-Loading="Loading" element-loading-background="var(--bg-color)">
         <div v-for="(page, pageIndex) in pagedAchievements" :key="pageIndex" class="certificate-container">
             <div class="certificate-border">
                 <div class="content">
@@ -110,7 +110,7 @@
     const totalAchievements = ref(0);
     const Logo = ref('default');
     const isLogin = ref(undefined);
-    const Loading = ref(false);
+    const Loading = ref(true);
     const levelToColor = {
         3: "#f8bf29",
         2: "silver",
@@ -208,6 +208,7 @@
     });
 
     onMounted(async () => {
+        Loading.value = true;
         updateLogo();
         const loggedIn = await checkSession();
         if (!loggedIn) {
@@ -217,8 +218,7 @@
             isLogin.value = true;
         }
         await getSelfAchievedAchievements();
-        Loading.value = true;
-        emit('load');
+        Loading.value = false;
     });
 
     const emit = defineEmits()

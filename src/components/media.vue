@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" v-Loading="Loading" element-loading-background="var(--bg-color)">
         <div class="user">
             <div class="nickname">{{ nickname }}</div>
         </div>
@@ -75,10 +75,19 @@
 
     import html2canvas from "html2canvas";
     import { jsPDF } from "jspdf";
-    import { toRefs } from "vue";
+    import { toRefs, ref, watch } from "vue";
 
     const { certificateRef } = toRefs(props);
+    const Loading = ref(true);
 
+    watch(
+        () => props.totalAchievements,
+        async (data) => {
+            if (data !== null) {
+                Loading.value = false;
+            }
+        },
+    );
     async function captureCertificate() {
         // 优先使用隐藏的certificate组件
         let target = null;

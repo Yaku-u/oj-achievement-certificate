@@ -1,15 +1,15 @@
 <template>
-    <div class="AppContainer" v-loading="isLoading" element-loading-background="var(--bg-color)">
-        <Menu :certificateRef="certificateRef" v-show="!isLoading"/>
+    <div class="AppContainer" >
+        <Menu :certificateRef="certificateRef" />
         <fallback v-if="certificateData.isLogin === false" class="flexCenter"/>
-        <certificate ref="certificateRef" class="certificate flexCenter" @updateData="handleUpdate" v-show="!isMobile && certificateData.isLogin" @load="onCertificateLoad"/>
+        <certificate ref="certificateRef" class="certificate flexCenter" @updateData="handleUpdate" v-show="!isMobile && certificateData.isLogin" />
         <!-- 移动端 -->
 
         <media class="media flexCenter"  v-show="isMobile && certificateData.isLogin" :nickname="certificateData.nickname"
             :totalAchievements="certificateData.totalAchievements" :goldCount="certificateData.goldCount"
             :silverCount="certificateData.silverCount" :copperCount="certificateData.copperCount"
             :certificateRef="certificateRef"/>
-        <footer v-show="!isLoading">© 2008-2025 SDUTACM. All Rights Reserved.</footer>
+        <footer >© 2008-2025 SDUTACM. All Rights Reserved.</footer>
     </div>
     
     <!-- 将组件传送到隐藏容器 -->
@@ -29,11 +29,6 @@
     const certificateRef = ref(null);
     const hiddenCertificateRef = ref(null);
     const isMobile = ref(false);
-    const isLoading = ref(true);
-
-    function onCertificateLoad() {
-        isLoading.value = false; 
-    }
 
     onMounted(() => {
         isMobile.value = window.innerWidth <= 768
